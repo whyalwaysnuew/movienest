@@ -1,12 +1,4 @@
-import PropType from 'prop-types';
-
-// FeaturedMovies.propTypes = {
-//     slug: PropType.string.isRequired,
-//     name: PropType.string.isRequired,
-//     category: PropType.string.isRequired,
-//     thumbnail: PropType.string.isRequired,
-//     rating: PropType.number,
-// }
+import { Link } from "@inertiajs/react";
 
 const FeaturedMovies = ({
     slug,
@@ -48,7 +40,7 @@ const FeaturedMovies = ({
                     <img src="/icons/ic_play.svg" width="50" alt="" />
                 </div>
             </div>
-            <a href={slug} className="inset-0 absolute z-50"></a>
+            <Link href={route("prototype.movie.show", slug)} className="inset-0 absolute z-50"></Link>
         </div>
     );
 }

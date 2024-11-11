@@ -4,7 +4,7 @@ import Flickity from "react-flickity-component";
 import FeaturedMovies from "@/Components/FeaturedMovies";
 import CardMovie from "@/Components/CardMovie";
 
-const Dashboard = () => {
+const Dashboard = ({auth, featuredMovies, movies}) => {
     const flickityOptions = {
         cellAlign: "left",
         contain: true,
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
     return (
         <>
-            <Authenticated>
+            <Authenticated auth={auth}>
                 <Head>
                     <link
                         rel="stylesheet"
@@ -35,14 +35,14 @@ const Dashboard = () => {
                             options={flickityOptions}
                         >
                             {/* Movie Thumbnail */}
-                            {[1, 2, 3, 4].map((i) => (
+                            {featuredMovies.map((movie, i) => (
                                 <FeaturedMovies
-                                    name={`Emily in Paris ${i}`}
-                                    category="Action Drama"
-                                    thumbnail="https://fastly.picsum.photos/id/7/4728/3168.jpg?hmac=c5B5tfYFM9blHHMhuu4UKmhnbZoJqrzNOP9xjkV4w3o"
-                                    slug="ngab-ers"
-                                    rating={i + 1}
-                                    key={i}
+                                    name={movie?.name}
+                                    category={movie?.category}
+                                    thumbnail={movie?.thumbnail}
+                                    slug={movie?.slug}
+                                    rating={movie?.rating}
+                                    key={movie?.id}
                                 />
                             ))}
                         </Flickity>
@@ -56,13 +56,13 @@ const Dashboard = () => {
                             className="gap-[30px]"
                             options={flickityOptions}
                         >
-                            {[1, 2, 3, 4, 5, 6, 7].map((i) => (
+                            {movies.map((movie, i) => (
                                 <CardMovie
-                                    key={i}
-                                    name={`Ngabers ${i}`}
-                                    category="Animation Drama"
-                                    slug="ngabers-gg"
-                                    thumbnail="https://fastly.picsum.photos/id/17/2500/1667.jpg?hmac=HD-JrnNUZjFiP2UZQvWcKrgLoC_pc_ouUSWv8kHsJJY"
+                                    key={movie?.id}
+                                    name={movie?.name}
+                                    category={movie?.category}
+                                    slug={movie?.slug}
+                                    thumbnail={movie?.thumbnail}
                                 />
                             ))}
                         </Flickity>

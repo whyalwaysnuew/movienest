@@ -1,8 +1,7 @@
 import { useState, useRef } from "react";
-import { Link, usePage } from "@inertiajs/react";
+import { Link } from "@inertiajs/react";
 
-const Topbar = () => {
-    const user = usePage()?.props?.auth?.user;
+const Topbar = ({name}) => {
     const [dropdownOpen, setDropdownOpen] = useState(true)
     const dropdownTarget = useRef();
 
@@ -25,7 +24,7 @@ const Topbar = () => {
             />
             <div className="flex items-center gap-4">
                 <span className="text-black text-sm font-medium">
-                    Welcome, {user?.name}
+                    Welcome, {name}
                 </span>
 
                 <div className="collapsible-dropdown flex flex-col gap-2 relative">

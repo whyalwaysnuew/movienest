@@ -5,7 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
-Route::redirect('/', '/prototype/login');
+Route::redirect('/', '/login');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -30,14 +30,15 @@ Route::prefix('prototype')->name('prototype.')->group(function(){
         return inertia::render('Prototype/Dashboard');
     })->name('dashboard');
 
-    Route::get('/subscription-plan', function(){
-        return inertia::render('Prototype/SubscriptionPlan');
-    })->name('subscriptionPlan');
-
     Route::get('/movie/{slug}', function(){
         return inertia::render('Prototype/Movie/Show');
     })->name('movie.show');
 
 });
+
+Route::get('/subscription-plan', function(){
+    return inertia::render('Prototype/SubscriptionPlan');
+})->name('subscriptionPlan');
+
 
 require __DIR__.'/auth.php';

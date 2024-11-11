@@ -17,18 +17,23 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::prefix('prototype')->group(function(){
+Route::prefix('prototype')->name('prototype.')->group(function(){
     Route::get('/login', function(){
         return inertia::render('Prototype/Login');
-    })->name('prototype.login');
+    })->name('login');
 
     Route::get('/register', function(){
         return inertia::render('Prototype/Register');
-    })->name('prototype.register');
+    })->name('register');
 
     Route::get('/dashboard', function(){
         return inertia::render('Prototype/Dashboard');
-    })->name('prototype.dashboard');
+    })->name('dashboard');
+
+    Route::get('/subscription-plan', function(){
+        return inertia::render('Prototype/SubscriptionPlan');
+    })->name('subscriptionPlan');
+
 });
 
 require __DIR__.'/auth.php';

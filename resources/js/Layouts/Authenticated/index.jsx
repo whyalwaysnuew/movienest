@@ -11,15 +11,15 @@ const Authenticated = ({children}) => {
 
                 {/* Start:Content */}
                 <div className="ml-[300px] px-[50px]">
-                    <div className="py-10 flex flex-col gap-[50px]">
                         {/* Start:Topbar */}
-                        <Topbar />
+                        <div className="py-5">
+                            <Topbar />
+                        </div>
                         {/* End:Topbar */}
 
                         <main>
                             {children}
                         </main>
-                    </div>
                 </div>
                 {/* End: Content */}
 

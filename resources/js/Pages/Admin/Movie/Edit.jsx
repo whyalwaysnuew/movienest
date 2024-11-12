@@ -1,31 +1,37 @@
 import Authenticated from "@/Layouts/Authenticated";
-import { Head, Link, useForm } from "@inertiajs/react";
+import { Head, useForm, Link, usePage } from "@inertiajs/react";
 import InputError from "@/Components/InputError";
 import TextInput from "@/Components/TextInput";
 import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import Checkbox from "@/Components/Checkbox";
+import { router } from "@inertiajs/react";
 
-const Create = ({auth}) => {
-    const {data, setData, post, processing, errors} = useForm({
-        name: '',
-        category: '',
-        video_url: '',
-        thumbnail: '',
-        rating: '',
-        is_featured: false,
+const Edit = ({auth, movie}) => {
+    const { data, setData, processing } = useForm({
+        ...movie
     });
+
+    const errors = usePage().props.errors;
 
     const submit = (e) => {
         e.preventDefault();
-        post(route("admin.dashboard.movie.store"));
-    }
+
+        if(data.thumbnail === movie.thumbnail) {
+            delete data.thumbnail;
+        }
+
+        router.post(route("admin.dashboard.movie.update", movie.id), {
+            _method: "PUT",
+            ...data
+        });
+    };
 
     return (
         <Authenticated auth={auth}>
-            <Head title="Create Movie" />
+            <Head title="Edit Movie" />
 
-            <h1 className="text-xl font-bold">Create New Movie</h1>
+            <h1 className="text-xl font-bold">Edit | {movie?.name}</h1>
             <hr className="my-4" />
 
             <form onSubmit={submit} className="grid space-y-[14px]">
@@ -92,6 +98,11 @@ const Create = ({auth}) => {
                         value="Thumbnail"
                         className="block mb-2 text-lg font-semibold"
                     />
+                    <img
+                        src={`/storage/${movie?.thumbnail}`}
+                        alt={movie?.name}
+                        className="w-32 rounded-md mb-2"
+                    />
                     <input
                         type="file"
                         name="thumbnail"
@@ -131,6 +142,7 @@ const Create = ({auth}) => {
                             setData("is_featured", e.target.checked)
                         }
                         className="bg-gray-200 h-[20px] w-[20px]"
+                        checked={movie?.is_featured}
                     />
                     <InputLabel
                         htmlFor="is_featured"
@@ -140,7 +152,7 @@ const Create = ({auth}) => {
                     <InputError message={errors.is_featured} className="mt-2" />
                 </div>
 
-                <div className="grid space-y-[14px] mt-[50px]">
+                <div className="grid space-y-[20px] mt-[50px]">
                     <PrimaryButton
                         type="submit"
                         className="rounded-2xl hover:bg-orange-600 bg-alerange py-[13px] mt-[50px] text-center"
@@ -166,4 +178,4 @@ const Create = ({auth}) => {
     );
 }
 
-export default Create;
+export default Edit;

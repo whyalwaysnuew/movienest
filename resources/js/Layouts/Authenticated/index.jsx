@@ -6,7 +6,7 @@ const Authenticated = ({auth, children}) => {
         <>
             <div className="mx-auto max-w-screen hidden lg:block">
                 {/* Sidebar */}
-                <Sidebar />
+                <Sidebar auth={auth} />
                 {/* End Sidebar */}
 
                 {/* Start:Content */}

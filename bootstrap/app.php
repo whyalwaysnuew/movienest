@@ -19,8 +19,9 @@ return Application::configure(basePath: dirname(__DIR__))
             'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
             'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
             'checkUserSubscription' => \App\Http\Middleware\CheckUserSubscription::class
+        ])->validateCsrfTokens(except: [
+            'midtrans/notification',
         ]);
-
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {

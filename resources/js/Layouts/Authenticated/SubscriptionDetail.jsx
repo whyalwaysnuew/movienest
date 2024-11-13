@@ -23,10 +23,12 @@ const SubscriptionDetail = ({isPremium, name, remainingActiveDays, activeDays}) 
                             {name}
                         </div>
                         <div className="text-black text-sm mb-2">
-                            {remainingActiveDays} of {activeDays} hari
+                            {remainingActiveDays.toFixed()} of {activeDays} hari
                         </div>
                         <div className="rounded-full w-full h-[6px] bg-[#f1f1f1]">
-                            <div className="rounded-full h-full w-2/12 bg-alerange"></div>
+                            <div
+                                className={`rounded-full h-full w-9/12 bg-alerange ${loadingProgress()}`}
+                            ></div>
                         </div>
                     </div>
                 </div>
@@ -40,8 +42,7 @@ const SubscriptionDetail = ({isPremium, name, remainingActiveDays, activeDays}) 
                             {name}
                         </div>
                         <div className="text-white text-sm mb-2">
-                            {remainingActiveDays.toFixed()}{" "}
-                            of {activeDays} hari
+                            {remainingActiveDays.toFixed()} of {activeDays} hari
                         </div>
                         <div className="rounded-full w-full h-[6px] bg-[#333333]">
                             <div

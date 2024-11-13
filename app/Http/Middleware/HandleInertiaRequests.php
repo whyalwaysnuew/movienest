@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Auth;
 use Carbon\Carbon;
+use Session;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -57,6 +58,10 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
                 'activePlan' => $this->activePlan()
             ],
+            'flashMessage' => [
+                'message' => Session::get('message'),
+                'type' => Session::get('type')
+            ]
         ];
     }
 }
